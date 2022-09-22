@@ -1,0 +1,50 @@
+1、不存在变量提升
+声明变量 let const var
+// js执行过程 全程扫描一下错误 预编译环节 一句一句逐行执行
+2、typeof不在是百分百正确
+console.log(typeof c);
+let c;
+3、const可以冻结对象
+const foo = Object.freeze({})
+foo.name = '123' // 严格模式下会报错
+4、解构赋值
+4.1、数组的解构赋值
+// 通过数组对变量进行赋值
+let arr = [1, 2, 3]
+console.log(arr[0], arr[1], arr[2])
+let [a, b, c] = [1, 2, 3]
+console.log(a, b, c)
+4.1.1 模式匹配
+等号两边的模式相同，左边的变量就会被赋予对应的值
+4.1.4 默认值 es6内部使用===判断是否是undefined 如果是undefined默认值才会生效
+4.2 对象的解构赋值
+4.2.1
+let person = {
+  name: 'chris',
+  age:33
+}
+let {age:age, name:name} = person
+console.log(age)
+console.log(name)
+
+let {sex} = person
+console.log(sex) // 解构不成功会返回undefined
+// 真正被赋值的是后者 对象解构赋值的实质
+// 会先找到同名的属性 赋值给后者的变量
+4.2.2 可以取到继承的属性
+const obj1 = {}
+const obj2 = {name: 'laney'}
+// 设置obj2是obj1的原型
+方法一：Object.setPrototypeof(obj1,obj2)
+方法二：obj1.__proto__ = obj2
+const {name} = obj1
+console.log(name)
+
+默认值的生效条件：对象属性的值 严格===undefined
+const {x = 1} = {x:undefined}
+const {y = 3} = {y:null}
+console.log(x) // 1
+console.log(y) // null
+
+
+
