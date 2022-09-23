@@ -1,0 +1,98 @@
+1、连接连个数组的方法
+let arr1 = [1,2,3]
+let arr2 = [4,5,6]
+arr1.concat(arr2) // 不影响arr1
+Array.prototype.push.apply(arr1, arr2) // 影响arr1
+arr1.push(...arr2)
+
+2、打包拆包
+打包
+let {x, y, ...z} = {x:1, y:2, a:3, b:4}
+console.log(z)
+等号右边必须是一个对象
+拆包
+// 复制 浅拷贝 深拷贝
+// 数组的浅拷贝 concat，对象的浅拷贝 Object.assign({}, obj)
+// 对象的扩展运算符 ...也是浅拷贝
+
+3、Symbol数据结构
+// 新提出的一个数据结构 Symbol基本数据类型 Symbol表示独一无二 第七种数据类型
+// 对象的属性是字符串 对象的话隐式调用toString()转化成字符串
+let a = {a:1}
+let b = {b:2}
+let c = {}
+c[a] = 3;
+c[b] = 4
+console.log(c) // {'[object object]': 4}
+let s = Symbol()
+typeof s   // 'Symbol' 第七种一般数据类型
+
+Symbol.iterator属性
+对象的Symbol.iterator属性，指向该对象的默认遍历器的方法 for...of循环的时候会低啊用Symbol.iterator
+
+Object.getOwnPropertySymbols() // 返回一个数组，里面的值是所有用作属性名的Symbol的值
+
+
+
+4、Set数据结构   Set是es6新提出的一个新的引用数据类型 类似于数据  但是成员是惟一的 没有重复的值
+证明set是js新的引用数据类型，不可以用typeof判断
+
+    let arr = [1,2,3,4]
+    let obj = {name:'张三'}
+    let nu = null // 历史遗留问题
+    console.log(typeof arr);  // object
+    console.log(typeof obj);  // object
+    console.log(typeof nu);   // object
+    可以使用instanceof、Object.prototype.toString.call()
+    console.log(arr instanceof Array) // true
+    console.log(obj instanceof Object) // true
+    console.log(Object.prototype.toString.call(arr)) // string [object]
+    console.log(Object.prototype.toString.call(obj)) // string [object] 
+    
+    const set = new Set([1,2,3,4,5,6,5])
+    console.log(set instanceof Set) // true
+    console.log(Object.prototype.toString.call(set) === '[object Set]')
+    
+    // 转化成数组
+    console.log([...set])
+    console.log(Array.from(set))
+    
+    
+    ## Set数据内部判断值得机制
+```javascript
+// Set数据内部判断值得机制 类似于 === 
+    let newSet = new Set()
+    let a = 5;
+    let b = '5'
+    newSet.add(a)
+    newSet.add(b)
+    // ? 里面有几项 ？
+    console.log(newSet);
+    // 特殊情况NaN 
+    // 因为 NaN === NaN 
+    newSet.add(NaN)
+    newSet.add(NaN)
+    console.log(newSet);
+```
+## Set实例的属性和方法
+### Set的属性
+```javascript
+let lastSet = new Set()
+
+lastSet.add(1).add(2).add(2).add('2').add(NaN).add(NaN)
+
+console.log(lastSet.size);
+    
+```
+### add delete has clear
+```javascript
+ let lastSet = new Set()
+    lastSet.add(1).add(2).add(2).add('2').add(NaN).add(NaN)
+    console.log(lastSet.size);
+    // 判断是否有这一项
+    console.log(lastSet.has(2));
+    lastSet.clear()
+    console.log(lastSet);
+    
+    
+ 
