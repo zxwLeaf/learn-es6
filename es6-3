@@ -1,0 +1,42 @@
+1、Map es6新提出的一种引用类型的数据结构 类似于对象
+const map = new Map()
+const o = {p: 'hello'}
+map.set(o, 'content')
+console.log(map.get(o))
+
+证明是引用数据类型
+const map = new Map()
+console.log(map instanceof Map)
+console.log(Object.prototype.toString.call(map) === '[object Map]')
+
+赋值
+const map = new Map([
+['name', '张三'],
+['age', 18],
+[123, 'abc'],
+[true, 666]
+])
+map.get(true) // 666
+map.get(123) 'abc'
+
+2、具有迭代器iterator接口 每个成员都是双元素的数组的数据结构 都可以当做map构造函数的参数
+
+数据部署了iterator结构 就可以用for...of循环遍历
+for...of循环遍历的过程
+1、创建一个指针对象 指向数据的初始位置 iterator就是一个指针对象
+2、第一次调用指针对象的next() 可以将指针指向第一个成员
+!!!! 每一次调用指针对象的时候每次调用next()方法 会返回 value 指的是值 done是布尔值 用来标识遍历是否完成
+
+Iterator接口部署在数据结构的Symbol.iterator属性
+
+原生具备Iterator接口的数据结构 Array Set Map String
+
+3、函数参数的默认值
+传统的设置默认值  y = y || '默认值'  当传0的时候，打印不出实参
+改进
+if (typeof y === undefined) {
+     y = '默认值'
+}
+
+es6改进   function get(x, y = '默认值'){}
+
