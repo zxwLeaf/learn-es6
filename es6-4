@@ -1,0 +1,30 @@
+class类
+es6新提供的一种生成对象实例的写法 es5构造函数的另外一种写法（语法糖）
+// function Person(age, name) {
+        //     this.age = age
+        //     this.name = name
+        // }
+        // Person.prototype.say = function() {
+        //     console.log(`名字是${this.name}，年龄是${this.age}`)
+        // }
+        // let p = new Person('12', 'Amy')
+        // p.say()
+        class Person {
+            constructor(age, name) {
+                    this.age = age
+                    this.name = name
+                    this.say = this.say.bind(this)
+                }
+                // say = () => {
+                //     console.log(`名字是${this.name}，年龄是${this.age}`)
+
+            // }
+            say() {
+                console.log(`名字是${this.name}，年龄是${this.age}`)
+            }
+        }
+        let p = new Person('30', 'lily')
+        let {
+            say
+        } = p
+        say() // 绑定this 方法一：constructor里面bind绑定this 方法二：箭头函数，箭头函数在哪里定义，this就指向谁 方法三：proxy
