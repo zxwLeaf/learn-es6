@@ -1,0 +1,24 @@
+// es6的继承
+        class Father {
+            constructor(name, age, eat) {
+                this.name = name
+                this.age = age
+                this.eat = eat
+            }
+            do() {
+                console.log(`我是${this.name}，我喜欢吃${this.eat.join('、')}`)
+            }
+        }
+        class Son extends Father {
+            constructor(name, age, eat, hobby) {
+                super(name, age, eat)
+                this.hobby = hobby
+            }
+        }
+        let s = new Son('amy', 12, ['苹果', '香蕉', '猕猴桃'], '游泳')
+        let p = new Father('nike', 40, ['葡萄', '水蜜桃'])
+        console.log(s)         // Son {name: 'amy', age: 12, eat: Array(3), hobby: '游泳'}
+        console.log(s.do())    // 我是amy，我喜欢吃苹果、香蕉、猕猴桃
+        console.log(p)         // Father {name: 'nike', age: 40, eat: Array(2)}
+        console.log(p.do())    // 我是nike，我喜欢吃葡萄、水蜜桃
+        
