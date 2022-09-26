@@ -22,3 +22,30 @@
         console.log(p)         // Father {name: 'nike', age: 40, eat: Array(2)}
         console.log(p.do())    // 我是nike，我喜欢吃葡萄、水蜜桃
         
+        
+        // es5的组合继承
+        
+        function Father(name, age, eat) {
+            this.name = name
+            this.age = age
+            this.eat = eat
+        }
+        Father.prototype.do = function() {
+            console.log(`我是${this.name}，我喜欢吃${this.eat.join('、')}`)
+        }
+
+        function Son(name, age, eat, hobby) {
+            Father.call(this, name, age, eat)
+            this.hobby = hobby
+        }
+        Son.prototype.doSomething = function() {
+            console.log(`我的爱好是${this.hobby}`)
+        }
+        Son.prototype = new Father()
+        Son.prototype.constructor = Son
+        let s = new Son('amy', 12, ['苹果', '香蕉', '猕猴桃'], '游泳')
+        let p = new Father('nike', 40, ['葡萄', '水蜜桃'])
+        console.log(s) // Son {name: 'amy', age: 12, eat: Array(3), hobby: '游泳'}
+        console.log(s.do()) // 我是amy，我喜欢吃苹果、香蕉、猕猴桃
+        console.log(p) // Father {name: 'nike', age: 40, eat: Array(2)}
+        console.log(p.do()) // 我是nike，我喜欢吃葡萄、水蜜桃
